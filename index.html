@@ -1,0 +1,787 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Little Scrapbook 💗</title>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Pacifico&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --pink:#ed91ae;
+  --light:#fff0f4;
+  --paper:#fffaf5;
+  --dark:#784a60;
+  --rose:#d76e91;
+}
+
+* {box-sizing:border-box}
+
+body {
+  margin:0;
+  color:var(--dark);
+  font-family:'DM Sans',sans-serif;
+  background:
+    radial-gradient(circle at 10% 10%,#ffd9e5,transparent 35%),
+    radial-gradient(circle at 90% 80%,#ead9ff,transparent 35%),
+    #fff1f5;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+button {font:inherit;cursor:pointer}
+
+.decor {
+  position:fixed;
+  pointer-events:none;
+  opacity:.65;
+  z-index:0;
+  animation:float 5s ease-in-out infinite;
+}
+
+.d1 {top:7%;left:5%;font-size:30px}
+.d2 {top:20%;right:6%;font-size:35px;animation-delay:1s}
+.d3 {bottom:12%;left:7%;font-size:32px;animation-delay:2s}
+
+@keyframes float {
+  50% {transform:translateY(-15px) rotate(10deg)}
+}
+
+header {
+  text-align:center;
+  padding:40px 15px 20px;
+  position:relative;
+  z-index:1;
+}
+
+.logo {
+  font-family:'Pacifico',cursive;
+  color:#d76e91;
+  font-size:clamp(27px,6vw,44px);
+}
+
+.subtitle {
+  font-family:'Caveat',cursive;
+  font-size:22px;
+}
+
+.container {
+  width:min(900px,94%);
+  margin:10px auto 50px;
+  position:relative;
+  z-index:1;
+}
+
+.notebook {
+  background:#fffaf6;
+  border:2px solid #f5d4df;
+  border-radius:20px;
+  padding:20px;
+  box-shadow:0 15px 50px #bd799533;
+  position:relative;
+}
+
+.tape {
+  position:absolute;
+  width:100px;
+  height:25px;
+  background:#f6c8d6aa;
+  top:-10px;
+  left:50%;
+  transform:translateX(-50%) rotate(-3deg);
+}
+
+.nav {
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-bottom:20px;
+}
+
+.nav button {
+  border:1px solid #f1c4d2;
+  background:#fff0f5;
+  color:#a95d7c;
+  border-radius:30px;
+  padding:10px 16px;
+  font-size:13px;
+  transition:.3s;
+}
+
+.nav button.active,
+.nav button:hover {
+  background:#e98eae;
+  color:white;
+}
+
+.page {
+  display:none;
+  animation:appear .5s ease;
+  min-height:390px;
+}
+
+.page.active {display:block}
+
+@keyframes appear {
+  from {opacity:0;transform:translateY(12px)}
+  to {opacity:1;transform:translateY(0)}
+}
+
+.hero {
+  text-align:center;
+  padding:35px 15px;
+  background:linear-gradient(135deg,#ffe4ed,#fff1f5);
+  border-radius:18px;
+  border:1px dashed #eab1c4;
+}
+
+.hero h1 {
+  font-family:'Pacifico',cursive;
+  color:#d76e91;
+  font-size:clamp(25px,5vw,38px);
+}
+
+.hero p {
+  line-height:1.8;
+  max-width:500px;
+  margin:auto;
+}
+
+.sticker {font-size:45px}
+
+.card {
+  background:white;
+  border:1px solid #f4d7e0;
+  border-radius:16px;
+  padding:20px;
+  margin:15px 0;
+  box-shadow:0 5px 15px #bc819018;
+}
+
+.hand {
+  font-family:'Caveat',cursive;
+  font-size:25px;
+  color:#c9698d;
+}
+
+.primary {
+  background:#e98eae;
+  color:white;
+  border:0;
+  padding:13px 22px;
+  border-radius:30px;
+  box-shadow:0 5px 15px #e98eae50;
+  transition:.2s;
+}
+
+.primary:hover {transform:translateY(-3px)}
+
+.center {text-align:center}
+
+/* AMPL0P BARU - SUDAH DIPERBAIKI */
+
+.envelope {
+  margin:35px auto 20px;
+  width:min(280px,90%);
+  height:170px;
+  background:#f5b6ca;
+  position:relative;
+  border-radius:8px;
+  display:grid;
+  place-items:center;
+  cursor:pointer;
+  box-shadow:0 10px 25px #a66a8430;
+  transition:.4s ease;
+  z-index:1;
+}
+
+.envelope:before {
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  border-left:140px solid transparent;
+  border-right:140px solid transparent;
+  border-top:100px solid #e994b1;
+  transform-origin:top;
+  transition:.5s ease;
+  z-index:2;
+}
+
+.envelope.open:before {
+  transform:rotateX(180deg);
+}
+
+.envelope-icon {
+  font-size:48px;
+  z-index:3;
+  transition:.3s;
+}
+
+.envelope.open .envelope-icon {
+  opacity:0;
+}
+
+/* SURAT DI BAWAH AMPLOP */
+
+.letter {
+  display:none;
+  position:relative;
+  width:min(100%,420px);
+  margin:25px auto;
+  padding:25px;
+  background:#fff;
+  border:1px solid #f4c7d6;
+  border-radius:15px;
+  box-shadow:0 8px 25px #bd799522;
+  line-height:2;
+  font-size:15px;
+  color:#784a60;
+  text-align:left;
+  white-space:normal;
+  word-wrap:break-word;
+}
+
+.letter.show {
+  display:block;
+  animation:letterDown .7s ease forwards;
+}
+
+@keyframes letterDown {
+  from {
+    opacity:0;
+    transform:translateY(20px);
+  }
+  to {
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+/* GALERI */
+
+.polaroids {
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:18px;
+  margin-top:20px;
+}
+
+.polaroid {
+  background:white;
+  padding:10px 10px 25px;
+  box-shadow:0 5px 15px #a56d7930;
+  transform:rotate(-3deg);
+  transition:.3s;
+}
+
+.polaroid:nth-child(even) {transform:rotate(3deg)}
+.polaroid:hover {transform:rotate(0) scale(1.04)}
+
+.photo {
+  height:160px;
+  background:linear-gradient(135deg,#ffd6e4,#e7d5ff);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:45px;
+  overflow:hidden;
+}
+
+.photo img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.caption {
+  text-align:center;
+  font-family:'Caveat',cursive;
+  font-size:20px;
+  margin-top:10px;
+}
+
+/* GAME */
+
+.game-options {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:15px;
+}
+
+.game-options button {
+  padding:13px;
+  border:1px solid #efbfd0;
+  border-radius:12px;
+  background:#fff1f5;
+  color:#a95d7c;
+}
+
+.result {
+  font-family:'Caveat',cursive;
+  font-size:23px;
+  margin-top:20px;
+  color:#d76e91;
+}
+
+input {
+  border:1px solid #edc1d0;
+  border-radius:10px;
+  padding:12px;
+  width:100%;
+  margin:10px 0;
+  font:inherit;
+}
+
+footer {
+  text-align:center;
+  padding:20px;
+  font-family:'Caveat',cursive;
+  font-size:22px;
+}
+
+#musicBtn {
+  position:fixed;
+  bottom:20px;
+  right:18px;
+  border:0;
+  background:#e98eae;
+  color:white;
+  border-radius:50%;
+  width:52px;
+  height:52px;
+  font-size:22px;
+  box-shadow:0 5px 20px #d76e9166;
+  z-index:5;
+}
+
+.heart {
+  position:fixed;
+  bottom:-30px;
+  pointer-events:none;
+  animation:rise 4s linear forwards;
+  z-index:10;
+}
+
+@keyframes rise {
+  to {
+    transform:translateY(-110vh) rotate(30deg);
+    opacity:0;
+  }
+}
+
+@media(max-width:500px) {
+  .notebook {padding:12px}
+  .nav button {padding:9px 11px;font-size:11px}
+  .photo {height:120px}
+  .page {min-height:420px}
+  .letter {padding:20px;font-size:14px}
+}
+</style>
+</head>
+
+<body>
+
+<div class="decor d1">🎀</div>
+<div class="decor d2">🌷</div>
+<div class="decor d3">🦋</div>
+
+<header>
+  <div class="logo">Our Little Scrapbook</div>
+  <div class="subtitle">a tiny place made just for you, sayang ♡</div>
+</header>
+
+<div class="container">
+<div class="notebook">
+<div class="tape"></div>
+
+<nav class="nav">
+<button class="active" onclick="showPage('home',this)">🏠 Home</button>
+<button onclick="showPage('letter',this)">💌 Letter</button>
+<button onclick="showPage('gallery',this)">📸 Memories</button>
+<button onclick="showPage('game',this)">🎮 Game</button>
+<button onclick="showPage('mood',this)">🌷 Mood</button>
+</nav>
+
+<!-- HOME -->
+<section id="home" class="page active">
+<div class="hero">
+  <div class="sticker">🎀 💗 🌷</div>
+  <h1>Hi, Sayang!</h1>
+  <p>
+  Welcome to our little world.
+  Sebuah tempat kecil yang aku buat
+  khusus untuk kamu.
+  </p>
+  <br>
+  <button class="primary" onclick="goPage('letter',1)">
+  Open my little surprise ♡
+  </button>
+</div>
+
+<div class="card center">
+  <div class="hand">A little reminder for you...</div>
+  Kamu itu berharga, kamu itu spesial,
+  dan kamu pantas mendapatkan banyak
+  hal baik dalam hidupmu. 💗
+</div>
+
+<div class="card center">
+  <span style="font-size:35px">🧸</span>
+  <p class="hand">Made with love, only for you.</p>
+</div>
+</section>
+
+<!-- LETTER -->
+<section id="letter" class="page">
+
+<h2 class="hand center">
+  A letter for my favorite person 💌
+</h2>
+
+<p class="center">
+  Klik amplopnya untuk membuka surat!
+</p>
+
+<div class="envelope" id="envelope" onclick="toggleLetter()">
+  <div class="envelope-icon">💌</div>
+</div>
+
+<!-- SURAT TIDAK LAGI TERTUTUP AMPLOP -->
+<div class="letter" id="loveLetter">
+  <strong>Dear Sayang, 💗</strong>
+
+  <br><br>
+
+  Aku mungkin nggak selalu punya
+  kata-kata yang sempurna, tapi aku
+  ingin kamu tahu bahwa kamu adalah
+  seseorang yang sangat berharga.
+
+  <br><br>
+
+  Kalau harimu terasa berat, jangan
+  lupa kalau kamu boleh istirahat.
+  Nggak perlu selalu kuat setiap saat.
+
+  <br><br>
+
+  Thank you for being you. I love
+  seeing you happy! 🌷
+
+  <br><br>
+
+  With love, seseorang yang sayang kamu. 💗
+</div>
+
+<div class="card center">
+  <p class="hand">One thing I want you to remember...</p>
+  "You deserve a love that makes you feel safe,
+  appreciated, and happy."
+</div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery" class="page">
+<h2 class="hand center">Our little memories 📸</h2>
+<p class="center">Ganti kotak emoji ini dengan foto kalian!</p>
+
+<div class="polaroids">
+  <div class="polaroid">
+    <div class="photo">
+        <img src="tiara2.jpeg" alt="">
+    </div>
+    <div class="caption">Pretty moments</div>
+  </div>
+  <div class="polaroid">
+    <div class="photo">
+        <img src="tiara3.jpeg" alt="">
+    </div>
+    <div class="caption">My favorite person</div>
+  </div>
+  <div class="polaroid">
+    <div class="photo">
+        <img src="tiara1.jpeg" alt="">
+    </div>
+    <div class="caption">Little happiness</div>
+  </div>
+  <div class="polaroid">
+    <div class="photo">
+        <img src="tiara.jpeg" alt="">
+    </div>
+    <div class="caption">my happiness</div>
+  </div>
+</div>
+
+<div class="card center">
+  <label>Tambahkan foto dari perangkatmu:</label>
+  <input type="file" id="photoInput" accept="image/*" multiple>
+  <div id="uploaded" class="polaroids"></div>
+</div>
+</section>
+
+<!-- GAME -->
+<section id="game" class="page">
+<h2 class="hand center">How well do you know us? 🎮</h2>
+
+<div class="card">
+  <h3 id="question">Apa hal paling penting dalam hubungan?</h3>
+  <div class="game-options" id="options">
+    <button onclick="answer(0)">Saling percaya 💗</button>
+    <button onclick="answer(1)">Saling pamer</button>
+    <button onclick="answer(2)">Banyak hadiah</button>
+    <button onclick="answer(3)">Selalu benar</button>
+  </div>
+  <div id="gameResult" class="result center"></div>
+  <button class="primary" onclick="nextQuestion()">Pertanyaan selanjutnya ↗</button>
+</div>
+</section>
+
+<!-- MOOD -->
+<section id="mood" class="page">
+<h2 class="hand center">A little happiness for you 🌷</h2>
+
+<div class="hero">
+  <div style="font-size:55px">🌸</div>
+  <h2>How are you feeling today?</h2>
+  <p>Klik tombol di bawah untuk mendapatkan
+  sedikit kebahagiaan!</p>
+  <br>
+  <button class="primary" onclick="boost()">✨ Cheer me up!</button>
+  <div class="result" id="boostResult">
+  Your happiness matters. 💗
+  </div>
+</div>
+
+<div class="card center">
+  <div class="hand">A virtual hug for you!</div>
+  <div style="font-size:50px">🫂</div>
+  <button class="primary" onclick="hugs()">Get a hug ♡</button>
+  <div id="hugResult" class="result"></div>
+</div>
+</section>
+
+</div>
+</div>
+
+<footer>
+  Forever a little piece of my heart ♡
+  <br>Made with love 🎀
+</footer>
+
+<button id="musicBtn" onclick="toggleMusic()">♫</button>
+
+<script>
+
+// NAVIGATION
+function showPage(id,btn) {
+  document.querySelectorAll('.page').forEach(p=>
+    p.classList.remove('active')
+  );
+
+  document.getElementById(id).classList.add('active');
+
+  document.querySelectorAll('.nav button').forEach(b=>
+    b.classList.remove('active')
+  );
+
+  btn.classList.add('active');
+}
+
+function goPage(id,index) {
+  showPage(id,document.querySelectorAll('.nav button')[index]);
+}
+
+// AMPL0P DAN SURAT
+function toggleLetter() {
+  const envelope=document.getElementById('envelope');
+  const letter=document.getElementById('loveLetter');
+
+  envelope.classList.toggle('open');
+  letter.classList.toggle('show');
+}
+
+// FLOATING HEARTS
+function createHeart() {
+  const h=document.createElement('div');
+  h.className='heart';
+
+  h.textContent=['💗','💕','♡','🌸'][
+    Math.floor(Math.random()*4)
+  ];
+
+  h.style.left=Math.random()*100+'vw';
+  h.style.fontSize=(15+Math.random()*20)+'px';
+  h.style.animationDuration=(3+Math.random()*3)+'s';
+
+  document.body.appendChild(h);
+
+  setTimeout(()=>h.remove(),6000);
+}
+
+setInterval(createHeart,900);
+
+// MOOD BOOSTER
+const quotes=[
+  "Hey sayang, kamu sudah melakukan yang terbaik hari ini. 🌷",
+  "Jangan terlalu keras sama diri sendiri ya. Kamu juga butuh istirahat. 💗",
+  "Semoga hari ini ada hal kecil yang membuatmu tersenyum. 🦋",
+  "Kamu berharga, bahkan di hari ketika kamu merasa biasa saja.",
+  "Take your time, sayang. Everything doesn't need to be perfect. 🎀",
+  "Ada seseorang yang berharap kamu selalu punya alasan untuk bahagia. 💌"
+];
+
+function boost() {
+  const q=quotes[Math.floor(Math.random()*quotes.length)];
+
+  document.getElementById('boostResult').textContent=q;
+
+  createHeart();
+}
+
+function hugs() {
+  document.getElementById('hugResult').textContent=
+  "Sending the biggest virtual hug to you, sayang! 🫂💗";
+
+  for(let i=0;i<5;i++) {
+    setTimeout(createHeart,i*200);
+  }
+}
+
+// GAME
+const questions=[
+ {
+  q:"Apa hal paling penting dalam hubungan?",
+  a:["Saling percaya 💗","Saling pamer","Banyak hadiah","Selalu benar"],
+  correct:0
+ },
+ {
+  q:"Kalau salah satu sedang sedih, sebaiknya?",
+  a:["Diabaikan","Didengarkan 💌","Dimarahi","Dibandingkan"],
+  correct:1
+ },
+ {
+  q:"Apa yang membuat kenangan jadi indah?",
+  a:["Harus mahal","Harus sempurna","Ketulusan 💗","Harus ramai"],
+  correct:2
+ },
+ {
+  q:"Apa yang paling penting saat berbeda pendapat?",
+  a:["Saling menghargai 🌷","Saling menyalahkan","Diam selamanya","Menang sendiri"],
+  correct:0
+ }
+];
+
+let current=0;
+
+function loadQuestion() {
+  const q=questions[current];
+
+  document.getElementById('question').textContent=q.q;
+
+  document.getElementById('gameResult').textContent='';
+
+  document.getElementById('options').innerHTML=
+  q.a.map((a,i)=>
+    `<button onclick="answer(${i})">${a}</button>`
+  ).join('');
+}
+
+function answer(i) {
+  const q=questions[current];
+
+  document.getElementById('gameResult').textContent=
+  i===q.correct?
+  "YEAY! Kamu benar, sayang! 🎉💗":
+  "Belum tepat, coba lagi yaa! 🌷";
+}
+
+function nextQuestion() {
+  current=(current+1)%questions.length;
+  loadQuestion();
+}
+
+// PHOTO UPLOAD
+document.getElementById('photoInput').addEventListener('change',function(e) {
+  const container=document.getElementById('uploaded');
+
+  [...e.target.files].forEach(file=>{
+    if(!file.type.startsWith('image/')) return;
+
+    const url=URL.createObjectURL(file);
+
+    const div=document.createElement('div');
+    div.className='polaroid';
+
+    const img=document.createElement('img');
+    img.src=url;
+    img.style.width='100%';
+    img.style.height='130px';
+    img.style.objectFit='cover';
+
+    const caption=document.createElement('div');
+    caption.className='caption';
+    caption.textContent='Our memory ♡';
+
+    const photo=document.createElement('div');
+    photo.className='photo';
+    photo.appendChild(img);
+
+    div.append(photo,caption);
+    container.appendChild(div);
+  });
+});
+
+// MUSIC BUTTON
+let audioContext=null;
+let musicOn=false;
+let oscillator=null;
+let gain=null;
+
+function toggleMusic() {
+  const btn=document.getElementById('musicBtn');
+
+  if(!musicOn) {
+    try {
+      audioContext=new (window.AudioContext||window.webkitAudioContext)();
+
+      oscillator=audioContext.createOscillator();
+      gain=audioContext.createGain();
+
+      oscillator.type='sine';
+      oscillator.frequency.value=523.25;
+
+      gain.gain.value=0.025;
+
+      oscillator.connect(gain);
+      gain.connect(audioContext.destination);
+
+      oscillator.start();
+
+      musicOn=true;
+      btn.textContent='♫';
+      btn.style.background='#ba7292';
+
+    } catch(e) {
+      alert('Audio tidak tersedia di browser ini.');
+    }
+
+  } else {
+    oscillator.stop();
+    audioContext.close();
+
+    musicOn=false;
+    btn.textContent='♫';
+    btn.style.background='#e98eae';
+  }
+}
+
+loadQuestion();
+
+</script>
+</body>
+</html>
